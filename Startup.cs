@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using WebTodoList.Models;
+using WebTodoLists;
 
 namespace WebTodoList
 {
@@ -35,7 +37,9 @@ namespace WebTodoList
                     .UseSnakeCaseNamingConvention()
             );
 
+            services.AddScoped<WebTodoListsService>();
             services.AddScoped<WebTodoListService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

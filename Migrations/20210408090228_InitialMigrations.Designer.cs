@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebTodoList;
+using WebTodoList.Models;
 
 namespace WebTodoList.Migrations
 {
     [DbContext(typeof(WebTodoListContext))]
-    [Migration("20210408072955_InitialMigrations")]
+    [Migration("20210408090228_InitialMigrations")]
     partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,10 +46,52 @@ namespace WebTodoList.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
+                    b.Property<int>("TodoListId")
+                        .HasColumnType("integer")
+                        .HasColumnName("todo_list_id");
+
                     b.HasKey("Id")
                         .HasName("pk_todo_items");
 
+                    b.HasIndex("TodoListId")
+                        .HasDatabaseName("ix_todo_items_todo_list_id");
+
                     b.ToTable("todo_items");
+                });
+
+            modelBuilder.Entity("WebTodoList.TodoList", b =>
+                {
+                    b.Property<int>("TodoListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("todo_list_id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("TodoListId")
+                        .HasName("pk_todo_lists");
+
+                    b.ToTable("todo_lists");
+                });
+
+            modelBuilder.Entity("WebTodoList.TodoItem", b =>
+                {
+                    b.HasOne("WebTodoList.TodoList", "TodoList")
+                        .WithMany("TodoItems")
+                        .HasForeignKey("TodoListId")
+                        .HasConstraintName("fk_todo_items_todo_lists_todo_list_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TodoList");
+                });
+
+            modelBuilder.Entity("WebTodoList.TodoList", b =>
+                {
+                    b.Navigation("TodoItems");
                 });
 #pragma warning restore 612, 618
         }
