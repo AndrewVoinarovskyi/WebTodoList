@@ -20,14 +20,16 @@ namespace WebTodoLists.Controllers
         }
 
         [HttpGet]
-        public List<TodoList> GetTodoLists()
+        public List<TodoListDto> GetTodoLists()
         {
 
             return service.Read();
         }
 
+        
+
         [HttpPost("")]
-        public void PostTodoList(TodoList list)
+        public void PostTodoList(TodoListDto list)
         {
             service.Create(list);
         }
@@ -42,6 +44,19 @@ namespace WebTodoLists.Controllers
         public void DeleteTodoList(int listId)
         {
             service.Delete(listId);
+        }
+
+        [HttpGet("collection/today")]
+        public ActionResult<IEnumerable<TodoListDto>> GetMyListsWithTasks()
+        {
+            return Ok(service.GetTodayTodos());
+        }
+
+
+        [HttpGet("dashboard")]
+        public ActionResult<IEnumerable<TodoListDto>> GetTodayTodoList()
+        {
+            return Ok(service.GetDashboard());
         }
     }
 }

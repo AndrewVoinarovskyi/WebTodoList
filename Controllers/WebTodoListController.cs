@@ -7,7 +7,7 @@ using WebTodoList.Models;
 
 namespace WebTodoList.Controllers
 {
-    [Route("api/WebTodoLists/{listId}/[controller]")]
+    [Route("api/WebTodoLists/{listId}")]
     [ApiController]
     public class WebTodoListController : ControllerBase
     {
@@ -19,11 +19,18 @@ namespace WebTodoList.Controllers
         }
 
         [HttpGet]
-        public List<TodoItem> GetTodoItems(int listId)
+        public IQueryable<TodoItemDto> GetTodoItems(int listId)
         {
 
             return service.Read(listId);
         }
+
+        [HttpGet("tasks")]
+        public ActionResult<TodoItemDto> GetTasks(int listId, bool all)
+        {
+            return Ok(service.GetIsAllTodos(listId, all));
+        }
+
 
         // [HttpGet("{id}")]
         // public ActionResult<TodoItem> GetTodoItemById(int listId, int id)
@@ -32,13 +39,13 @@ namespace WebTodoList.Controllers
         // }
 
         [HttpPost("")]
-        public void PostTodoItem(int listId, TodoItem model)
+        public void PostTodoItem(int listId, TodoItemDto model)
         {
             service.Create(listId, model);
         }
 
         [HttpPatch("{id}")]
-        public void Update(int listId, int id, TodoItem model)
+        public void Update(int listId, int id, TodoItemDto model)
         {
             service.Update(listId, id, model);
         }
@@ -50,64 +57,3 @@ namespace WebTodoList.Controllers
         }
     }
 }
-
-
-/////////////////////////////////////////////////////////////////////////////
-
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Mvc;
-// //using TodoItem.Models;
-
-// namespace TodoItem.Controllers
-// {
-//     [Route("api/TodoList/{listId}/[controller]")]
-//     [ApiController]
-//     public class TodoItemController : ControllerBase
-//     {
-//         private TodoItemService service;
-
-//         public TodoItemController(TodoItemService service)
-//         {
-//             this.service = service;
-//         }
-
-//         [HttpGet]
-//         public List<TodoItem> GetTodoItems(int listId)
-//         {
-
-//             return service.GetAll(listId);
-//         }
-
-//         [HttpGet("{id}")]
-//         public ActionResult<TodoItem> GetTodoItemById(int listId, int id)
-//         {
-//             return service.GetById(listId, id);
-//         }
-
-//         [HttpPost("")]
-//         public ActionResult<TodoItem> PostTodoItem(int listId, TodoItem model)
-//         {
-//             TodoItem todoItem = service.Create(listId, model);
-
-//             return Created($"api/todoItem/{todoItem.Id}", todoItem);
-//         }
-
-//         [HttpPut("{id}")]
-//         public  TodoItem PutTodoItem(int listId, int id, TodoItem model)
-//         {
-
-//             return service.Change(listId, id, model);
-//         }
-
-//         [HttpDelete("{id}")]
-//         public List<TodoItem> DeleteTodoItemById(int listId, int id)
-//         {
-
-
-//             return service.Delete(listId, id);
-//         }
-//     }
-// }

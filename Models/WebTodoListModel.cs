@@ -6,8 +6,9 @@ namespace WebTodoList.Models
 {
     public class WebTodoListContext : DbContext
     {
-        public DbSet<TodoList> TodoLists { get; set; }
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<TodoListDto> TodoLists { get; set; }
+        public DbSet<TodoItemDto> TodoItems { get; set; }
+        public DbSet<TodayTodosDto> DashboardDtos { get; set; }
 
         public WebTodoListContext(DbContextOptions<WebTodoListContext> options) : base(options) { }
 
@@ -19,26 +20,36 @@ namespace WebTodoList.Models
         {
             base.OnConfiguring(optionsBuilder);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<TodayTodosDto>(
+                    eb =>
+                    {
+                        eb.HasNoKey();
+                        eb.ToView("View_BlogPostCounts");
+                    });
+        }
         
     }
 
-    public class TodoList
+    public class TodoListDto
     {
-        public int TodoListId { get; set; } 
+        public int TodoListDtoId { get; set; } 
         public string Title { get; set; }
 
-        public List<TodoItem> TodoItems { get; set; }
+        public List<TodoItemDto> TodoItems { get; set; }
     }
 
-    public class TodoItem
+    public class TodoItemDto
     {
-        public int TodoItemId { get; set; }
+        public int TodoItemDtoId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? DueDate { get; set; }
         public bool Done { get; set; }
 
         public int TodoListId { get; set; }
-        public TodoList TodoList { get; set; }
+        public TodoListDto TodoList { get; set; }
     }
 }
