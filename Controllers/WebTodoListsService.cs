@@ -51,7 +51,7 @@ namespace WebTodoLists
 
         internal object GetTodayTodos()
         {
-            return _context.TodoItems.Include(table => table.TodoList);
+            return _context.TodoItems.Include(table => table.TodoList.Title);
         }
 
         public void Delete(int id)
