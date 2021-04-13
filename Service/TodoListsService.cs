@@ -1,19 +1,19 @@
-using WebTodoList;
+using TodoList;
 using System.Linq;
 using System.Collections.Generic;
-using WebTodoList.Models;
+using TodoList.Models;
 using System;
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Models;
 
-namespace WebTodoLists
+namespace TodoLists
 {
-    public class WebTodoListsService
+    public class TodoListsService
     {
-        private WebTodoListContext _context;
+        private TodoListContext _context;
         private List<TodoListDto> todoLists;
 
-        public WebTodoListsService(WebTodoListContext context)
+        public TodoListsService(TodoListContext context)
         {
             this._context = context;
         }

@@ -1,17 +1,17 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using WebTodoList.Models;
+using TodoList.Models;
 
-namespace WebTodoList
+namespace TodoList
 {
-    public class WebTodoListService
+    public class TodoListService
     {
 
-        private WebTodoListContext _context;
+        private TodoListContext _context;
         private int lastListId = 0;
 
-        public WebTodoListService(WebTodoListContext context)
+        public TodoListService(TodoListContext context)
         {
             this._context = context;
         }

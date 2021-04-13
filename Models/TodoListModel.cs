@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebTodoList.Models
+namespace TodoList.Models
 {
-    public class WebTodoListContext : DbContext
+    public class TodoListContext : DbContext
     {
         public DbSet<TodoListDto> TodoLists { get; set; }
         public DbSet<TodoItemDto> TodoItems { get; set; }
         public DbSet<TodayTodosDto> DashboardDtos { get; set; }
 
-        public WebTodoListContext(DbContextOptions<WebTodoListContext> options) : base(options) { }
+        public TodoListContext(DbContextOptions<TodoListContext> options) : base(options) { }
 
         // public WebTodoListContext()
         // {

@@ -13,10 +13,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using WebTodoList.Models;
-using WebTodoLists;
+using TodoList.Models;
+using TodoLists;
 
-namespace WebTodoList
+namespace TodoList
 {
     public class Startup
     {
@@ -31,14 +31,14 @@ namespace WebTodoList
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<WebTodoListContext>(options =>
+            services.AddDbContext<TodoListContext>(options =>
                 options
                     .UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
                     .UseSnakeCaseNamingConvention()
             );
 
-            services.AddScoped<WebTodoListsService>();
-            services.AddScoped<WebTodoListService>();
+            services.AddScoped<TodoListsService>();
+            services.AddScoped<TodoListService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

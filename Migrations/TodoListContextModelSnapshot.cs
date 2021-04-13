@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using WebTodoList.Models;
+using TodoList.Models;
 
-namespace WebTodoList.Migrations
+namespace TodoList.Migrations
 {
-    [DbContext(typeof(WebTodoListContext))]
+    [DbContext(typeof(TodoListContext))]
     partial class WebTodoListContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

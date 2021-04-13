@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebTodoList;
-using WebTodoList.Models;
+using TodoList;
+using TodoList.Models;
 
-namespace WebTodoLists.Controllers
+namespace TodoLists.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class WebTodoListsController : ControllerBase
     {
-        private WebTodoListsService service;
+        private TodoListsService service;
 
-        public WebTodoListsController(WebTodoListsService service)
+        public WebTodoListsController(TodoListsService service)
         {
             this.service = service;
         }

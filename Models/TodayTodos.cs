@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebTodoList.Models
+namespace TodoList.Models
 {
     public class TodayTodosDto
     {

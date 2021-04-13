@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using WebTodoList;
-using WebTodoList.Models;
+using TodoList;
+using TodoList.Models;
 
-namespace WebTodoList.Migrations
+namespace TodoList.Migrations
 {
-    [DbContext(typeof(WebTodoListContext))]
+    [DbContext(typeof(TodoListContext))]
     [Migration("20210408090228_InitialMigrations")]
     partial class InitialMigrations
     {
