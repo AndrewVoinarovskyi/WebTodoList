@@ -2,32 +2,32 @@
 
 namespace TodoList.Migrations
 {
-    public partial class InitialD : Migration
+    public partial class AddingDtos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "name",
+                name: "todo_list_id",
                 table: "todo_lists",
-                newName: "title");
+                newName: "todo_list_dto_id");
 
             migrationBuilder.RenameColumn(
-                name: "id",
+                name: "todo_item_id",
                 table: "todo_items",
-                newName: "todo_item_id");
+                newName: "todo_item_dto_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "title",
+                name: "todo_list_dto_id",
                 table: "todo_lists",
-                newName: "name");
+                newName: "todo_list_id");
 
             migrationBuilder.RenameColumn(
-                name: "todo_item_id",
+                name: "todo_item_dto_id",
                 table: "todo_items",
-                newName: "id");
+                newName: "todo_item_id");
         }
     }
 }

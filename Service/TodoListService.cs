@@ -30,16 +30,30 @@ namespace TodoList
             return todoItems;
         }
 
-        internal IQueryable<TodoItemDto> GetIsAllTodos(int listId, bool all)
+        internal List<TodoItemDto> GetIsAllTodos(int listId, bool all)
         {
+            IQueryable<TodoItemDto> todoItems = Read(listId);
+            var isAllTodos = new List<TodoItemDto> ();
+
             using (var db = _context)
             if (!all)
             {
-                return db.TodoItems.Where(table => table.TodoListId == listId && table.Done == false);
+                foreach (var item in todoItems)
+                {
+                    if (!item.Done)
+                    {
+                        isAllTodos.Add(item);                        
+                    }
+                }
+                return isAllTodos;
             }
             else
             {
-                return db.TodoItems.Where(table => table.TodoListId == listId);
+                foreach (var item in todoItems)
+                {
+                    isAllTodos.Add(item);
+                }
+                return isAllTodos;
             }
         }
 

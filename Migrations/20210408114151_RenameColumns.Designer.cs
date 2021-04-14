@@ -11,7 +11,7 @@ namespace TodoList.Migrations
 {
     [DbContext(typeof(TodoListContext))]
     [Migration("20210408114151_InitialD")]
-    partial class InitialD
+    partial class RenameColumns
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

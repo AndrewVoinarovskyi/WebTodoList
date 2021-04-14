@@ -11,7 +11,7 @@ namespace TodoList.Migrations
 {
     [DbContext(typeof(TodoListContext))]
     [Migration("20210409091904_InitialSchema")]
-    partial class InitialSchema
+    partial class AddingDtos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
