@@ -73,21 +73,5 @@ namespace TodoList
                 db.SaveChanges();
             }
         }
-
-
-
-        // private void Add(int listId, TodoItem item)
-        // {
-        //     using (var db = _context)
-        //     {
-        //         while (db.TodoLists.Find(listId) == null)
-        //         {
-        //             db.TodoLists.Add(new TodoList{Name = $"List {++lastListId}"});
-        //         }
-        //         db.TodoItems.Add(item);
-        //         db.SaveChanges();
-        //     }
-        
-        // }
     }
 }

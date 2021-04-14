@@ -69,7 +69,7 @@ namespace TodoLists
             List<TodayTodosDto> list = new List<TodayTodosDto>();
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "select todo_lists.todo_list_id, todo_lists.title, Count(todo_items.done) from todo_items right join todo_lists on todo_lists.todo_list_id=todo_items.todo_list_id  where todo_items.done=false group by todo_lists.todo_list_id, todo_lists.title order by todo_lists.todo_list_id";
+                command.CommandText = "select todo_lists.todo_list_dto_id, todo_lists.title, Count(todo_items.done) from todo_items right join todo_lists on todo_lists.todo_list_dto_id=todo_items.todo_list_id  where todo_items.done=false group by todo_lists.todo_list_dto_id, todo_lists.title order by todo_lists.todo_list_dto_id";
                 _context.Database.OpenConnection();
                 using (var result = command.ExecuteReader())
                 {
@@ -83,7 +83,6 @@ namespace TodoLists
                             Count = result.GetInt32(2)
                         });
                     }
-
                 }
             }
 

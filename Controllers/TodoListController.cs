@@ -7,7 +7,7 @@ using TodoList.Models;
 
 namespace TodoList.Controllers
 {
-    [Route("api/WebTodoLists/{listId}")]
+    [Route("lists/{listId}")]
     [ApiController]
     public class TodoListController : ControllerBase
     {
@@ -30,13 +30,6 @@ namespace TodoList.Controllers
         {
             return Ok(service.GetIsAllTodos(listId, all));
         }
-
-
-        // [HttpGet("{id}")]
-        // public ActionResult<TodoItem> GetTodoItemById(int listId, int id)
-        // {
-        //     return service.GetById(listId, id);
-        // }
 
         [HttpPost("")]
         public void PostTodoItem(int listId, TodoItemDto model)

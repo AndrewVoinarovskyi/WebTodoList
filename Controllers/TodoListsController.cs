@@ -8,7 +8,7 @@ using TodoList.Models;
 
 namespace TodoLists.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class WebTodoListsController : ControllerBase
     {
@@ -25,8 +25,6 @@ namespace TodoLists.Controllers
 
             return service.Read();
         }
-
-        
 
         [HttpPost("")]
         public void PostTodoList(TodoListDto list)

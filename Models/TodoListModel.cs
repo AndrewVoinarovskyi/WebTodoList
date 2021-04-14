@@ -12,10 +12,6 @@ namespace TodoList.Models
 
         public TodoListContext(DbContextOptions<TodoListContext> options) : base(options) { }
 
-        // public WebTodoListContext()
-        // {
-        // }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
