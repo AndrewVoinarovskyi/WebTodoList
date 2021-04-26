@@ -3,56 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TodoList;
-using TodoList.Models;
+using TodoLists;
+using TodoLists.Models;
 
 namespace TodoLists.Controllers
 {
     [Route("")]
     [ApiController]
-    public class WebTodoListsController : ControllerBase
+    public class TodoListsController : ControllerBase
     {
         private TodoListsService service;
 
-        public WebTodoListsController(TodoListsService service)
+        public TodoListsController(TodoListsService service)
         {
             this.service = service;
         }
 
         [HttpGet]
-        public List<TodoListDto> GetTodoLists()
+        public IEnumerable<TodoList> GetTodoLists()
         {
-
-            return service.Read();
+            return service.ReadAll();
         }
 
         [HttpPost("")]
-        public void PostTodoList(TodoListDto list)
+        public void PostTodoList(TodoList list)
         {
-            service.Create(list);
+            service.CreateList(list);
         }
 
         [HttpPatch("{listId}")]
         public void PatchTodoList(int listId, string title)
         {
-            service.Update(listId, title);
+            service.UpdateTodoList(listId, title);
         }
 
         [HttpDelete("{listId}")]
         public void DeleteTodoList(int listId)
         {
-            service.Delete(listId);
+            service.DeleteList(listId);
         }
 
         [HttpGet("collection/today")]
-        public ActionResult<IEnumerable<TodoListDto>> GetMyListsWithTasks()
+        public ActionResult<IEnumerable<TodoList>> GetMyListsWithTasks()
         {
             return Ok(service.GetTodayTodos());
         }
 
 
         [HttpGet("dashboard")]
-        public ActionResult<IEnumerable<TodoListDto>> GetTodayTodoList()
+        public ActionResult<IEnumerable<TodoList>> GetTodayTodoList()
         {
             return Ok(service.GetDashboard());
         }

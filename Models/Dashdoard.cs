@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TodoList.Models;
+using TodoLists.Models;
 
-namespace ToDoList.Models
+namespace TodoLists.Models
 {
     public class DashboardDto
     {

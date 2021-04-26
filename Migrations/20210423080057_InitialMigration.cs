@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace TodoList.Migrations
+namespace WebTodoList.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,13 +12,13 @@ namespace TodoList.Migrations
                 name: "todo_lists",
                 columns: table => new
                 {
-                    todo_list_id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: true)
+                    title = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_todo_lists", x => x.todo_list_id);
+                    table.PrimaryKey("pk_todo_lists", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,7 +40,7 @@ namespace TodoList.Migrations
                         name: "fk_todo_items_todo_lists_todo_list_id",
                         column: x => x.todo_list_id,
                         principalTable: "todo_lists",
-                        principalColumn: "todo_list_id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

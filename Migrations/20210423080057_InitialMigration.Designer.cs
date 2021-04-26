@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using TodoList.Models;
+using TodoLists.Models;
 
-namespace TodoList.Migrations
+namespace WebTodoList.Migrations
 {
-    [DbContext(typeof(TodoListContext))]
-    [Migration("20210408114151_InitialD")]
-    partial class RenameColumns
+    [DbContext(typeof(TodoListsContext))]
+    [Migration("20210423080057_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,12 +21,29 @@ namespace TodoList.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("WebTodoList.Models.TodoItem", b =>
+            modelBuilder.Entity("TodoLists.Models.TodayTodosDto", b =>
                 {
-                    b.Property<int>("TodoItemId")
+                    b.Property<int>("Count")
+                        .HasColumnType("integer")
+                        .HasColumnName("count");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.ToView("View_BlogPostCounts");
+                });
+
+            modelBuilder.Entity("TodoLists.Models.TodoItem", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("todo_item_id")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
@@ -49,7 +66,7 @@ namespace TodoList.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("todo_list_id");
 
-                    b.HasKey("TodoItemId")
+                    b.HasKey("Id")
                         .HasName("pk_todo_items");
 
                     b.HasIndex("TodoListId")
@@ -58,27 +75,27 @@ namespace TodoList.Migrations
                     b.ToTable("todo_items");
                 });
 
-            modelBuilder.Entity("WebTodoList.Models.TodoList", b =>
+            modelBuilder.Entity("TodoLists.Models.TodoList", b =>
                 {
-                    b.Property<int>("TodoListId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("todo_list_id")
+                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Title")
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.HasKey("TodoListId")
+                    b.HasKey("Id")
                         .HasName("pk_todo_lists");
 
                     b.ToTable("todo_lists");
                 });
 
-            modelBuilder.Entity("WebTodoList.Models.TodoItem", b =>
+            modelBuilder.Entity("TodoLists.Models.TodoItem", b =>
                 {
-                    b.HasOne("WebTodoList.Models.TodoList", "TodoList")
+                    b.HasOne("TodoLists.Models.TodoList", "TodoList")
                         .WithMany("TodoItems")
                         .HasForeignKey("TodoListId")
                         .HasConstraintName("fk_todo_items_todo_lists_todo_list_id")
@@ -88,7 +105,7 @@ namespace TodoList.Migrations
                     b.Navigation("TodoList");
                 });
 
-            modelBuilder.Entity("WebTodoList.Models.TodoList", b =>
+            modelBuilder.Entity("TodoLists.Models.TodoList", b =>
                 {
                     b.Navigation("TodoItems");
                 });

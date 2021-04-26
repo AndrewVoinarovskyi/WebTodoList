@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace TodoList.Models
+namespace TodoLists.Models
 {
-    public class TodoListContext : DbContext
+    public class TodoListsContext : DbContext
     {
-        public DbSet<TodoListDto> TodoLists { get; set; }
-        public DbSet<TodoItemDto> TodoItems { get; set; }
+        public DbSet<TodoList> TodoLists { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<TodayTodosDto> DashboardDtos { get; set; }
 
-        public TodoListContext(DbContextOptions<TodoListContext> options) : base(options) { }
+        public TodoListsContext(DbContextOptions<TodoListsContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,23 +29,23 @@ namespace TodoList.Models
         
     }
 
-    public class TodoListDto
+    public class TodoList
     {
-        public int TodoListDtoId { get; set; } 
+        public int Id { get; set; } 
         public string Title { get; set; }
 
-        public List<TodoItemDto> TodoItems { get; set; }
+        public List<TodoItem> TodoItems { get; set; }
     }
 
-    public class TodoItemDto
+    public class TodoItem
     {
-        public int TodoItemDtoId { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? DueDate { get; set; }
         public bool Done { get; set; }
 
         public int TodoListId { get; set; }
-        public TodoListDto TodoList { get; set; }
+        public TodoList TodoList { get; set; }
     }
 }
