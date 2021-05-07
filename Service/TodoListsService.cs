@@ -39,16 +39,7 @@ namespace TodoLists
 
         public IQueryable<TodoItem> Read(int listId)
         {          
-            var todoItems = from td in _context.TodoItems
-                            select new TodoItem()
-                            {
-                                Id = td.Id,
-                                Title = td.Title,
-                                Description = td.Description,
-                                DueDate = td.DueDate,
-                                Done = td.Done,
-                            };
-            return todoItems;
+            return _context.TodoItems.Where(i => i.TodoListId == listId);
         }
 
         public void UpdateTodoList(int listId, string title)
@@ -132,8 +123,7 @@ namespace TodoLists
             List<TodayTodosDto> list = new List<TodayTodosDto>();
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "select todo_lists.todo_list_dto_id, todo_lists.title, Count(*) from todo_items right join todo_lists on todo_lists.todo_list_dto_id=todo_items.todo_list_id  where todo_items.done=false group by todo_lists.todo_list_dto_id, todo_lists.title order by todo_lists.todo_list_dto_id";
-                _context.Database.OpenConnection();
+                command.CommandText = "select l.my_list_id, l.title, Count(t.done) from my_lists l left join my_tasks t on l.my_list_id=t.my_list_id and not t.done group by l.my_list_id, l.title order by l.my_list_id";                _context.Database.OpenConnection();
                 using (var result = command.ExecuteReader())
                 {
                     while (result.Read())

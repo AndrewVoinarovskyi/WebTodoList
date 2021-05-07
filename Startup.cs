@@ -18,6 +18,8 @@ using TodoLists;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.JsonPatch;
+
+
 namespace TodoLists
 {
     public class Startup
@@ -39,7 +41,7 @@ namespace TodoLists
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                 builder =>
                                 {
-                                    builder.WithOrigins("http://localhost:63342", "https://127.0.0.1:63342")
+                                    builder.WithOrigins("http://localhost:3000", "https://127.0.0.1:3000")
                                                 .AllowAnyHeader()
                                                 .AllowAnyMethod();
                                 });
