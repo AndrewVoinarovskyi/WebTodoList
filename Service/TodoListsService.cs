@@ -123,7 +123,8 @@ namespace TodoLists
             List<TodayTodosDto> list = new List<TodayTodosDto>();
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "select l.my_list_id, l.title, Count(t.done) from my_lists l left join my_tasks t on l.my_list_id=t.my_list_id and not t.done group by l.my_list_id, l.title order by l.my_list_id";                _context.Database.OpenConnection();
+                command.CommandText = "select l.id, l.title, Count(t.done) from todo_lists l left join todo_items t on l.id=t.todo_list_id and not t.done group by l.id, l.title order by l.id";
+                _context.Database.OpenConnection();
                 using (var result = command.ExecuteReader())
                 {
                     while (result.Read())
